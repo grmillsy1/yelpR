@@ -10,7 +10,11 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.create(restaurant_params)
-    redirect_to '/restaurants'
+      if @restaurant.save
+        redirect_to '/restaurants'
+      else
+        render 'new'
+      end
   end
 
   def restaurant_params
@@ -26,10 +30,9 @@ class RestaurantsController < ApplicationController
   end
 
   def update
-  @restaurant = Restaurant.find(params[:id])
-  @restaurant.update(restaurant_params)
-
-  redirect_to '/restaurants'
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.update(restaurant_params)
+    redirect_to '/restaurants'
   end
 
   def destroy

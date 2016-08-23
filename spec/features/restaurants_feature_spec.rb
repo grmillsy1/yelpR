@@ -31,6 +31,17 @@ context 'creating restaurants' do
    expect(page).to have_content 'Mikes magic mushroom parlor'
    expect(current_path).to eq '/restaurants'
  end
+
+ context 'an invalid restaurant' do
+   it 'does not let you submit a name that is too short' do
+   visit '/restaurants'
+   click_link 'Add a restaurant'
+   fill_in 'Name', with: 'Mm'
+   click_button 'Create Restaurant'
+   expect(page).not_to have_css 'h2', text: 'Mm'
+   expect(page).to have_content 'error'
+   end
+ end
 end
 
 context 'viewing restaurants' do
@@ -51,6 +62,7 @@ context 'editing restaurants' do
 
   scenario 'let a user edit a restaurant' do
    visit '/restaurants'
+   click_link 'KFC'
    click_link 'Edit KFC'
    fill_in 'Name', with: 'Kentucky Fried Chicken'
    fill_in 'Description', with: 'Deep fried goodness'
@@ -69,9 +81,11 @@ context 'deleting restaurants' do
 
   scenario 'removes a restaurant when a user clicks a delete link' do
     visit '/restaurants'
+    click_link 'KFC'
     click_link 'Delete KFC'
     expect(page).not_to have_content 'KFC'
     expect(page).to have_content 'Restaurant deleted successfully'
   end
+
 
 end
