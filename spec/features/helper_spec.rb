@@ -7,3 +7,11 @@ def sign_up
   fill_in('Password confirmation', with: "test123")
   click_button('Sign up')
 end
+
+def create_restaurant
+  visit '/restaurants'
+  click_link 'Add a restaurant'
+  fill_in 'Name', with: 'New restaurant'
+  fill_in 'Description', with: 'Description'
+  click_button 'Create Restaurant'
+end
