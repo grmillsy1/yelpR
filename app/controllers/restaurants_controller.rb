@@ -20,7 +20,7 @@ before_action :authenticate_user!, :except => [:index, :show]
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :description)
+    params.require(:restaurant).permit(:name, :description, :image)
   end
 
   def show
@@ -38,7 +38,7 @@ before_action :authenticate_user!, :except => [:index, :show]
     redirect_to '/restaurants'
     else
       redirect_to '/restaurants', alert: 'You do not have permission to change this restaurant'
-    end 
+    end
   end
 
   def destroy

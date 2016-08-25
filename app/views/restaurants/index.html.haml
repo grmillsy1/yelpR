@@ -2,6 +2,7 @@
   - @restaurants.each do |restaurant|
     %h2=link_to restaurant.name, restaurant_path(restaurant)
     %h4=restaurant.description
+    = image_tag restaurant.image.url(:thumb)
     - restaurant.reviews.each do |review|
       %h4= "#{review.rating}*: #{review.thoughts}"
     %h4=link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant)

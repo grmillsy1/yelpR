@@ -6,6 +6,8 @@
     %h6=link_to "Edit review", edit_restaurant_review_path(@restaurant, review.id)
     %h6=link_to "Delete Review", restaurant_review_path(@restaurant, review.id), method: :delete
 
+= image_tag @restaurant.image.url(:medium)
+
 %h6=link_to "Review #{@restaurant.name}", new_restaurant_review_path(@restaurant)
 
 -if user_signed_in?
