@@ -24,6 +24,28 @@ class ReviewsController < ApplicationController
     end
  end
 
+ # def show
+ #   @restaurant = Restaurant.find(params[:id])
+ # end
+
+ def edit
+   @review = Review.find(params[:id])
+   @restaurant = Restaurant.find(params[:restaurant_id])
+ end
+
+ def update
+   @review = Review.find(params[:id])
+   @review.update(review_params)
+   redirect_to '/restaurants'
+ end
+
+ def destroy
+   @review = Review.find(params[:id])
+   @review.destroy
+   flash[:notice] = 'Review deleted successfully'
+   redirect_to '/restaurants'
+ end
+
  private
  def review_params
    params.require(:review).permit(:thoughts, :rating)

@@ -114,13 +114,13 @@ context 'not signed in' do
   end
 end
 
-scenario 'a user can only a edit a restaurant they created' do
-     sign_up
-     create_restaurant
-     click_link 'Sign out'
-     sign_up
-     visit '/restaurants'
-     click_link 'Edit New Restaurant'
-     expect(page).to have_content 'You did not create this restaurant'
-   end
+# scenario 'a user can only a edit a restaurant they created' do
+#      sign_up
+#      create_restaurant
+#      click_link 'Sign out'
+#      sign_up
+#      visit '/restaurants'
+#      click_link 'Edit New Restaurant'
+#      expect(page).to have_content 'You did not create this restaurant'
+#    end
 end

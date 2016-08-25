@@ -33,8 +33,12 @@ before_action :authenticate_user!, :except => [:index, :show]
 
   def update
     @restaurant = Restaurant.find(params[:id])
-    @restaurant.update(restaurant_params)
+    if current_user.restaurants.include? @restaurant
+      @restaurant.update(restaurant_params)
     redirect_to '/restaurants'
+    else
+      redirect_to '/restaurants', alert: 'You do not have permission to change this restaurant'
+    end 
   end
 
   def destroy

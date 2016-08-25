@@ -1,11 +1,14 @@
 %h2= @restaurant.name
 %h4= @restaurant.description
+- @restaurant.reviews.each do |review|
+  %h4= "#{review.rating}*: #{review.thoughts}"
+  -if current_user.reviews.include? review
+    %h6=link_to "Edit review", edit_restaurant_review_path(@restaurant, review.id)
+    %h6=link_to "Delete Review", restaurant_review_path(@restaurant, review.id), method: :delete
 
+%h6=link_to "Review #{@restaurant.name}", new_restaurant_review_path(@restaurant)
 
-- if user_signed_in?
-  %h6=link_to "Edit #{@restaurant.name}", edit_restaurant_path(@restaurant.id)
-  %h6=link_to "Delete #{@restaurant.name}", restaurant_path(@restaurant.id), method: :delete
--#
--# - @restaurant.reviews.each do |review|
--#   %h4= "#{review.rating}*: #{review.thoughts}"
--# %h4=link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant)
+-if user_signed_in?
+  - if current_user.restaurants.include? @restaurant
+    %h6=link_to "Edit #{@restaurant.name}", edit_restaurant_path(@restaurant.id)
+    %h6=link_to "Delete #{@restaurant.name}", restaurant_path(@restaurant.id), method: :delete
